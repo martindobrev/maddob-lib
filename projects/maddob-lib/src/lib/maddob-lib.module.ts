@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MaddobLibComponent } from './maddob-lib.component';
+import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.component';
 
 @NgModule({
-  declarations: [MaddobLibComponent],
+  declarations: [MarkdownEditorComponent],
   imports: [
   ],
-  exports: [MaddobLibComponent]
+  exports: [MarkdownEditorComponent]
 })
 export class MaddobLibModule { }

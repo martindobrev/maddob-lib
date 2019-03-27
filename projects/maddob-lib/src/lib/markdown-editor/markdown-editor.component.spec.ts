@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaddobLibComponent } from './maddob-lib.component';
+import { MarkdownEditorComponent } from './markdown-editor.component';
 
-describe('MaddobLibComponent', () => {
-  let component: MaddobLibComponent;
-  let fixture: ComponentFixture<MaddobLibComponent>;
+describe('MarkdownEditorComponent', () => {
+  let component: MarkdownEditorComponent;
+  let fixture: ComponentFixture<MarkdownEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MaddobLibComponent ]
+      declarations: [ MarkdownEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MaddobLibComponent);
+    fixture = TestBed.createComponent(MarkdownEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
