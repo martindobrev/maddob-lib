@@ -2,5 +2,169 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "maddob-lib": {
+      "root": "projects/maddob-lib",
+      "sourceRoot": "projects/maddob-lib/src",
+      "projectType": "library",
+      "prefix": "maddob",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/maddob-lib/tsconfig.lib.json",
+            "project": "projects/maddob-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/maddob-lib/src/test.ts",
+            "tsConfig": "projects/maddob-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/maddob-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/maddob-lib/tsconfig.lib.json",
+              "projects/maddob-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "maddob-tester": {
+      "root": "projects/maddob-tester/",
+      "sourceRoot": "projects/maddob-tester/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/maddob-tester",
+            "index": "projects/maddob-tester/src/index.html",
+            "main": "projects/maddob-tester/src/main.ts",
+            "polyfills": "projects/maddob-tester/src/polyfills.ts",
+            "tsConfig": "projects/maddob-tester/tsconfig.app.json",
+            "assets": [
+              "projects/maddob-tester/src/favicon.ico",
+              "projects/maddob-tester/src/assets"
+            ],
+            "styles": [
+              "projects/maddob-tester/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/maddob-tester/src/environments/environment.ts",
+                  "with": "projects/maddob-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "maddob-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "maddob-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "maddob-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/maddob-tester/src/test.ts",
+            "polyfills": "projects/maddob-tester/src/polyfills.ts",
+            "tsConfig": "projects/maddob-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/maddob-tester/karma.conf.js",
+            "styles": [
+              "projects/maddob-tester/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/maddob-tester/src/favicon.ico",
+              "projects/maddob-tester/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/maddob-tester/tsconfig.app.json",
+              "projects/maddob-tester/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "maddob-tester-e2e": {
+      "root": "projects/maddob-tester-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/maddob-tester-e2e/protractor.conf.js",
+            "devServerTarget": "maddob-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "maddob-tester:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/maddob-tester-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "maddob-lib"
 }

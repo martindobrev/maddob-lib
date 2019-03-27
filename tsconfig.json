@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "maddob-lib": [
+        "dist/maddob-lib"
+      ],
+      "maddob-lib/*": [
+        "dist/maddob-lib/*"
+      ]
+    }
   }
 }
