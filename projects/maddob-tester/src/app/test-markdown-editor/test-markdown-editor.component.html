@@ -1,0 +1,32 @@
+<div class="maddob-markdown-editor-container" [ngClass]="{'fullscreen': fullscreenEnabled}">
+  
+  <!-- HEADER -->
+  <div class="maddob-markdown-editor-header">
+
+    <div class="maddob-markdown-editor-left">
+      <button>bold</button>
+      <button>italic</button>
+      <button>quote</button>
+    </div>
+
+    <div class="maddob-markdown-editor-right">
+      <button (click)="togglePreview()">preview on</button>
+      <button (click)="toggleFullscreen()">fullscreen</button>
+    </div>
+    
+  </div>
+
+  <!-- CONTENT -->
+  <div class="maddob-markdown-editor-content">
+
+    <div class="maddob-markdown-editor" (window:resize)="resizeCodeMirror()"
+      [ngClass]="{'default-height': !fullscreenEnabled, 'full-height': fullscreenEnabled}">
+        <textarea #editor></textarea>
+    </div>
+
+    <div class="maddob-markdown-preview" [innerHTML]="parsedHtml" *ngIf="previewEnabled"
+      [ngClass]="{'default-height': !fullscreenEnabled, 'full-height': fullscreenEnabled}">
+    </div>
+
+  </div>
+</div>
