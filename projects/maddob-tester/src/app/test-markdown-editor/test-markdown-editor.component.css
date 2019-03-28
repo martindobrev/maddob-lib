@@ -48,10 +48,11 @@
 }
 
 .maddob-markdown-preview {
+    text-align: left;
     flex-basis: 50%;
     border-left: 1px solid #ccc;
     overflow: scroll;
-    
+    padding: 5px;
 }
 
 .default-height {
