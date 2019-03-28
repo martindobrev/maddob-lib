@@ -6,6 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "build_lib": "ng build maddob-lib",
+    "copy-license": "cp ./LICENSE ./dist/maddob-lib",
+    "copy-readme": "cp ./README.md ./dist/maddob-lib",
+    "copy-files": "npm run copy-license && npm run copy-readme",
+    "npm_pack": "cd dist/maddob-lib && npm pack",
+    "package": "npm run build_lib && npm run copy-files && npm run npm_pack",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
