@@ -1,6 +1,13 @@
 {
   "name": "maddob-lib",
   "version": "0.0.1",
+  "description": "Some useful angular components. Just import and start using them :)",
+  "keywords" :["Angular","Library"],
+  "license" : "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/martindobrev/maddob-lib"
+  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
