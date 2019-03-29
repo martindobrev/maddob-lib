@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, forwardRef, Attribute } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_ASYNC_VALIDATORS, Validator, NG_VALIDATORS, AbstractControl, ValidationErrors } from '@angular/forms';
 
 declare var CodeMirror: any;
 declare var marked: any;
@@ -13,36 +13,22 @@ declare var marked: any;
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => TestMarkdownEditorComponent),
+    },
+    {
+      provide: NG_VALIDATORS,
+      multi: true,
+      useExisting: forwardRef(() => TestMarkdownEditorComponent)
     }
   ]
 })
-export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, ControlValueAccessor, Validator {
   
-  writeValue(obj: any): void {
-    this.value = '';
-    if (typeof obj === 'string' && this.codeMirror) {
-      this.codeMirror.setValue(obj);
-    }
-  }
-  registerOnChange(fn: any): void {
-    //throw new Error("Method not implemented.");
-  }
-  registerOnTouched(fn: any): void {
-    //throw new Error("Method not implemented.");
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-
-    if (this.codeMirror) {
-      this.codeMirror.setOption('readOnly', isDisabled);
-    }
-  }
 
   /** CodeMirror editor instance */
   private codeMirror: any;
 
   /** editor text value */
-  private value: string;
+  private _value: string;
 
   /** parsed markdown value will be stored here */
   parsedHtml: string;
@@ -56,9 +42,24 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, Contr
   /** flag for disabling the editor (and all its controls) */
   disabled = false;
 
+  get value(): string {
+    return this._value || '';
+  }
+
+  set value(value: string) {
+    this._value = value;
+    this.parsedHtml = marked(this._value);
+    this.onChange(value);
+  }
+
+  onChange = (newValue: string) => {};
+  onTouched = () => {};
+
   @ViewChild("editor") editor: ElementRef;
 
-  constructor() { }
+  constructor(
+    @Attribute('required') public required: boolean = false,
+    @Attribute('maxlength') public maxlength: number = -1) { }
 
   ngOnInit() {
   }
@@ -74,10 +75,55 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, Contr
 
     this.codeMirror.doc.on('change', (instance: any, change: any) => {
       this.value = instance.getValue();
-      this.parsedHtml = marked(this.value);
     });
 
     this.resizeCodeMirror();
+  }
+
+  /* ControlValueAccessor methods  */
+  
+  writeValue(obj: any): void {
+    this._value = '';
+    if (typeof obj === 'string' && this.codeMirror) {
+      this.codeMirror.setValue(obj);
+      this.onChange(obj);
+    }
+  }
+  
+  registerOnChange(fn: (value: string) => void): void {
+    console.log('REGISTERING ON CHANGE to', fn);
+    this.onChange = fn;
+  }
+  
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+
+    if (this.codeMirror) {
+      this.codeMirror.setOption('readOnly', isDisabled);
+    }
+  }
+
+  /* END ControlValueAccessor methods  */
+
+
+  /**
+   * Validate implementation 
+   * 
+   * only required and maxlength for now
+   */
+  validate(control: AbstractControl): ValidationErrors {
+    let result: any = null;
+    if (this.required && this._value.length === 0) {
+      result = { required: true };
+    }
+    if (this.maxlength > 0 && this.value.length > this.maxlength) {
+      result = { maxlength: true };
+    }
+    return result;
   }
 
   /**
@@ -159,8 +205,8 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, Contr
     }
 
     newCursorPosition.ch += replacement.length - selection.length - additionalOffset;
-
     this.codeMirror.setCursor(newCursorPosition);
     this.codeMirror.focus();
+    this.onChange(this._value);
   }
 }

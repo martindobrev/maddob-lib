@@ -6,7 +6,6 @@
 
   <div>
     <h3>Dummy page form</h3>
-
     <div>
       <label>TITLE</label>
       <input type="text" name="title" [(ngModel)]="data.title"/>
@@ -14,9 +13,19 @@
 
     <div>
       <label>Content</label>
-      <app-test-markdown-editor name="content" [(ngModel)]="data.content"></app-test-markdown-editor>
+      <app-test-markdown-editor  name="content" [(ngModel)]="data.content" required="true" #content="ngModel"></app-test-markdown-editor>
+      <div class="error" *ngIf="content.hasError('required')">
+          Content is required.
+      </div>
+
+      <div class="error" *ngIf="content.hasError('maxlength')">
+          Content too long
+      </div>
     </div>
 
+
+    <h3>Value is:</h3>
+    <p>{{ data | json }}</p>
   </div>
 </div>
 
