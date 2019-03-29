@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 declare var CodeMirror: any;
 declare var marked: any;
@@ -6,9 +7,36 @@ declare var marked: any;
 @Component({
   selector: 'app-test-markdown-editor',
   templateUrl: './test-markdown-editor.component.html',
-  styleUrls: ['./test-markdown-editor.component.css']
+  styleUrls: ['./test-markdown-editor.component.css'],
+  providers: [
+    { 
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => TestMarkdownEditorComponent),
+    }
+  ]
 })
-export class TestMarkdownEditorComponent implements OnInit, AfterViewInit {
+export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, ControlValueAccessor {
+  
+  writeValue(obj: any): void {
+    this.value = '';
+    if (typeof obj === 'string' && this.codeMirror) {
+      this.codeMirror.setValue(obj);
+    }
+  }
+  registerOnChange(fn: any): void {
+    //throw new Error("Method not implemented.");
+  }
+  registerOnTouched(fn: any): void {
+    //throw new Error("Method not implemented.");
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+
+    if (this.codeMirror) {
+      this.codeMirror.setOption('readOnly', isDisabled);
+    }
+  }
 
   /** CodeMirror editor instance */
   private codeMirror: any;
@@ -24,6 +52,9 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   /** flag for show/hide preview area */
   previewEnabled = true;
+
+  /** flag for disabling the editor (and all its controls) */
+  disabled = false;
 
   @ViewChild("editor") editor: ElementRef;
 
