@@ -80,11 +80,12 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit {
    * insertion. For example if you have an own image selector and so on. 
    * 
    * @param type type of the content that is to be inserted
-   * @param value optional value (for special integrations)
+   * @param value optional value (for special custom content)
    */
   insertContent(type: string, value?: string) {
     let from = this.codeMirror.getCursor('from');
-    var selection = this.codeMirror.getSelection();
+    // if value is set, use it, if not get the selection instead
+    var selection = value ? value: this.codeMirror.getSelection();
     let to = this.codeMirror.getCursor('to');
     let newCursorPosition = {line: to.line, ch: to.ch};
     let additionalOffset = 0;
