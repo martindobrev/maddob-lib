@@ -4,10 +4,17 @@
   <div class="maddob-markdown-editor-header">
 
     <div class="maddob-markdown-editor-left">
-      <button>bold</button>
-      <button>italic</button>
-      <button>quote</button>
+      <button (click)="insertContent('bold')">bold</button>
+      <button (click)="insertContent('italic')">italic</button>
+      <button (click)="insertContent('quote')">quote</button>
+      <button (click)="insertContent('code')">code</button>
     </div>
+
+    <div class="maddob-markdown-editor-center">
+        <button (click)="insertContent('list')">list</button>
+        <button (click)="insertContent('link')">link</button>
+        <button (click)="insertContent('image')">image</button>
+      </div>
 
     <div class="maddob-markdown-editor-right">
       <button (click)="togglePreview()">preview on</button>

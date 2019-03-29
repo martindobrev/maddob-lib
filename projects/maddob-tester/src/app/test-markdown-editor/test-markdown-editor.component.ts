@@ -70,4 +70,65 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit {
     this.previewEnabled = !this.previewEnabled;
     this.resizeCodeMirror();
   }
+
+  /**
+   * Inserts special content into the editor 
+   * 
+   * can be used for different buttons like bold, italic, 
+   * 
+   * Override the method if you want to customize the behaviour of the 
+   * insertion. For example if you have an own image selector and so on. 
+   * 
+   * @param type type of the content that is to be inserted
+   * @param value optional value (for special integrations)
+   */
+  insertContent(type: string, value?: string) {
+    let from = this.codeMirror.getCursor('from');
+    var selection = this.codeMirror.getSelection();
+    let to = this.codeMirror.getCursor('to');
+    let newCursorPosition = {line: to.line, ch: to.ch};
+    let additionalOffset = 0;
+    var replacement = '';
+    switch(type) {
+      case 'bold':
+        replacement = `**${selection}**`;
+        this.codeMirror.replaceRange(replacement, from, to);
+        additionalOffset = 2;
+      break;
+      case 'italic':
+        replacement = `*${selection}*`;
+        this.codeMirror.replaceRange(replacement, from, to);
+        additionalOffset = 1;
+      break;
+      case 'quote':
+        replacement = `> ${this.codeMirror.getLine(from.line)}`;
+        this.codeMirror.replaceRange(replacement, {line: from.line, ch: 0}, {line: from.line, ch: replacement.length});
+        break;
+      case 'list':
+        replacement = `- ${this.codeMirror.getLine(from.line)}`;
+        this.codeMirror.replaceRange(replacement, {line: from.line, ch: 0}, {line: from.line, ch: replacement.length});
+        break;
+      case 'link':
+        replacement = `[](${selection})`;
+        this.codeMirror.replaceRange(replacement, from, to);
+        additionalOffset = 1;
+        break;
+      case 'image':
+        replacement = `![](${selection})`;
+        this.codeMirror.replaceRange(replacement, from, to);
+        additionalOffset = 2;
+        break;
+      case 'code':
+        replacement = `\`\`\`\r\n${selection}\r\n\`\`\``;        
+        this.codeMirror.replaceRange(replacement, from, to);
+        additionalOffset = 4;
+        break;
+      default:
+    }
+
+    newCursorPosition.ch += replacement.length - selection.length - additionalOffset;
+
+    this.codeMirror.setCursor(newCursorPosition);
+    this.codeMirror.focus();
+  }
 }
