@@ -3,17 +3,21 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-<h2>Basic Markdown Editor:</h2>
 
-<!--
-<maddob-markdown-editor ></maddob-markdown-editor>
--->
+  <div>
+    <h3>Dummy page form</h3>
 
+    <div>
+      <label>TITLE</label>
+      <input type="text" name="title" [(ngModel)]="data.title"/>
+    </div>
 
-<div>
-  <h2>This is the markdown editor:</h2>
+    <div>
+      <label>Content</label>
+      <app-test-markdown-editor name="content" [(ngModel)]="data.content"></app-test-markdown-editor>
+    </div>
 
-  <app-test-markdown-editor></app-test-markdown-editor>
+  </div>
 </div>
 
 
