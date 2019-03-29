@@ -1,0 +1,77 @@
+/* CodeMirror */
+.html-editor-container {
+    border: 1px solid #e5e5e5;
+}
+
+.full-border {
+    border: 1px solid #e5e5e5;
+}
+
+.CodeMirror-Editor-Tab {
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.editor-content {
+    border: 1px solid #e5e5e5;
+}
+
+
+.fullscreen {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1000;
+}
+
+.preview {
+    overflow: scroll;
+    overflow-wrap: break-word;
+    border-left: 1px solid #e5e5e5;
+    height: 300px;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.max-height {
+    height: 300px;
+    overflow: scroll;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-height textarea {
+    height: 100%;
+}
+
+.full-height > .uk-width-1-2 > .CodeMirror {
+    height: 100%;
+}
+
+.full-height div {
+    height: 100%;
+    background-color: white;
+    display: block;
+}
+
+#preview-content {
+    background: white;
+    padding: 5px;
+}
+
+.uk-icon {
+    padding: 0 5px;
+}
+
+.separator {
+    width: 1px;
+    background-color: #e5e5e5;
+}

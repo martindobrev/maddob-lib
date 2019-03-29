@@ -1,0 +1,53 @@
+<div [ngClass]="{'fullscreen': fullscreenEnabled}" class="full-border">
+    <div class="CodeMirror-Editor-Tab uk-background-muted uk-flex"  >
+        <div class="uk-flex uk-flex-left">
+            <a uk-icon="icon: bold" (click)="insertContent('bold')"
+            uk-tooltip="title: Bold; delay: 800"></a>
+            <a uk-icon="icon: italic" (click)="insertContent('italic')"
+            uk-tooltip="title: Italic; delay: 800"></a>   
+            <a uk-icon="icon: quote-right" (click)="insertContent('quote')"
+            uk-tooltip="title: Blockquote; delay: 800"></a>  
+        </div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left separator"></div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left">
+            <a uk-icon="icon: list" (click)="insertContent('list')"
+                uk-tooltip="title: List; delay: 800"></a>
+            <a uk-icon="icon: code" (click)="insertContent('code')"
+                uk-tooltip="title: Code; delay: 800"></a>
+        </div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left separator"></div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left">
+            <a uk-icon="icon: link" (click)="insertContent('link')" 
+                uk-tooltip="title: Link; delay: 800"></a>
+            <a uk-icon="icon: image" (click)="insertContent('image')"
+                uk-tooltip="title: image; delay: 800"></a>
+        </div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left separator"></div>
+
+        <div class="uk-flex uk-flex-left uk-margin-left">
+            <a *ngIf="previewEnabled" uk-icon="icon: chevron-right" (click)="previewEnabled = false; resizeCodeMirror()"></a>
+            <a *ngIf="!previewEnabled" uk-icon="icon: chevron-left" (click)="previewEnabled = true; resizeCodeMirror()" ></a>
+        </div>
+
+        <div class="uk-flex uk-flex-right" style="flex-grow: 1;">
+            <a *ngIf="!fullscreenEnabled"  uk-icon="icon: expand" (click)="toggleFullscreen()"></a>
+            <a *ngIf="fullscreenEnabled"  uk-icon="icon: shrink" (click)="toggleFullscreen()"></a>
+        </div>
+    </div>
+
+
+    <div class="editor-content" class="uk-grid" uk-grid [ngClass]="{'max-height': !fullscreenEnabled, 'full-height': fullscreenEnabled}">
+        <div class="code-mirror-container" [ngClass]="{'uk-width-1-2': previewEnabled, 'uk-width-expand': !previewEnabled, 'max-height': !fullscreenEnabled}" 
+        #codeMirrorContainer (window:resize)="resizeCodeMirror()">
+            <textarea #editor name="content"></textarea>
+        </div>
+        <div *ngIf="previewEnabled"
+        class="preview" [ngClass]="{'uk-width-1-2': previewEnabled, 'hidden': !previewEnabled }"
+        [innerHTML]="parsedHtml"></div>
+    </div>
+</div>

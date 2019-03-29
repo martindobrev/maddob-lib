@@ -25,7 +25,7 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, Contr
   
 
   /** CodeMirror editor instance */
-  private codeMirror: any;
+  protected codeMirror: any;
 
   /** editor text value */
   private _value: string;

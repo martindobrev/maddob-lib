@@ -1,0 +1,77 @@
+.maddob-markdown-editor-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.maddob-markdown-editor-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.maddob-markdown-editor-header-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.maddob-markdown-editor-header-center {
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.maddob-markdown-editor-header-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.maddob-markdown-editor-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    border-top: 1px solid black;
+}
+
+.maddob-markdown-editor {
+    flex-basis: 50%;
+    flex-grow: 1;
+    text-align: left;
+    overflow: scroll;
+}
+
+.maddob-markdown-editor textarea {
+    width: 100%;
+    height: 100%;
+
+}
+
+.maddob-markdown-preview {
+    text-align: left;
+    flex-basis: 50%;
+    border-left: 1px solid #ccc;
+    overflow: scroll;
+    padding: 5px;
+}
+
+.default-height {
+    height: 300px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+
+/***** FULLSCREEN CSS *****/
+.fullscreen {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1000;
+}
