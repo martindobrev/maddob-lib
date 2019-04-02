@@ -91,7 +91,6 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, ControlVa
   }
   
   registerOnChange(fn: (value: string) => void): void {
-    console.log('REGISTERING ON CHANGE to', fn);
     this.onChange = fn;
   }
   

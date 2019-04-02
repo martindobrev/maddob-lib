@@ -32,6 +32,4 @@ export class UikitMarkdownEditorComponent extends TestMarkdownEditorComponent im
       this.codeMirror.setSize(editorContainer.offsetWidth - 50, editorContainer.offsetHeight);
     }, 200);
   }
-  
-
 }

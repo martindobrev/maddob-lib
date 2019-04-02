@@ -28,14 +28,12 @@
     <p>{{ data | json }}</p>
   </div>
 
-
- 
-
   
 </div>
 
 <div>UI KIT DEMO </div>
-<app-uikit-markdown-editor [(ngModel)]="data.content"></app-uikit-markdown-editor>
+<app-uikit-markdown-editor [(ngModel)]="data.content" #content2="ngModel"></app-uikit-markdown-editor>
+<p *ngIf="content2.invalid">ERROR</p>
 
 
 

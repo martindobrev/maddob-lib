@@ -91,7 +91,6 @@ export class TestMarkdownEditorComponent implements OnInit, AfterViewInit, Contr
   }
   
   registerOnChange(fn: (value: string) => void): void {
-    console.log('REGISTERING ON CHANGE to', fn);
     this.onChange = fn;
   }
   
