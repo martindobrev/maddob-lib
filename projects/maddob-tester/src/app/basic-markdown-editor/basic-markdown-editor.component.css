@@ -6,14 +6,19 @@
     display: flex;
     flex-grow: 1;
     flex-direction: row;
+    height: 300px;
 }
 
 .maddob-markdown-editor {
     flex-basis: 50%;
     flex-grow: 1;
+    overflow: scroll;
 }
 
 .maddob-markdown-editor-preview {
     flex-basis: 50%;
+    flex-grow: 1;
+    overflow: scroll;
+    padding: 5px;
     border-left: 1px solid #ccc;
 }

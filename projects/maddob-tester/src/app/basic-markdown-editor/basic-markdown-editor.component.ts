@@ -10,6 +10,7 @@ declare var marked: any;
 })
 export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
+  codeMirror: any;
 
   parsedHtml = '';
 
@@ -21,14 +22,29 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // initialize code mirror instance
-    const codeMirror = CodeMirror.fromTextArea(this.editor.nativeElement, {
+    this.codeMirror = CodeMirror.fromTextArea(this.editor.nativeElement, {
       mode: 'markdown',
-      lineNumbers: true
+      lineNumbers: true,
+      lineWrapping: true
     });
 
     // refresh preview on change
-    codeMirror.doc.on('change', (instance: any, change: any) => {
+    this.codeMirror.doc.on('change', (instance: any, change: any) => {
       this.parsedHtml = marked(instance.getValue());
     });
+
+    this.resizeEditor();
+  }
+
+  /**
+   * Resize codemirror editor
+   * 
+   * Adjust the editor size in case the div size changes
+   */
+  resizeEditor() {
+    setTimeout(() => {
+      const editorContainer = this.editor.nativeElement.parentNode;
+      this.codeMirror.setSize(editorContainer.offsetWidth, editorContainer.offsetHeight);
+    }, 200);
   }
 }
