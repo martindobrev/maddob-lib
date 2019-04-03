@@ -58,9 +58,14 @@
               "projects/maddob-tester/src/assets"
             ],
             "styles": [
-              "projects/maddob-tester/src/styles.css"
+              "projects/maddob-tester/src/styles.css",
+              "./node_modules/codemirror/lib/codemirror.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/codemirror/lib/codemirror.js",
+              "./node_modules/codemirror/mode/markdown/markdown.js",
+              "./node_modules/marked/marked.min.js"
+            ]
           },
           "configurations": {
             "production": {
