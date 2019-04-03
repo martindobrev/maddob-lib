@@ -11,6 +11,8 @@ declare var marked: any;
 export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
 
+  parsedHtml = '';
+
   @ViewChild("editor") editor: ElementRef;
 
   constructor() { }
@@ -19,9 +21,14 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // initialize code mirror instance
-    CodeMirror.fromTextArea(this.editor.nativeElement, {
+    const codeMirror = CodeMirror.fromTextArea(this.editor.nativeElement, {
       mode: 'markdown',
       lineNumbers: true
+    });
+
+    // refresh preview on change
+    codeMirror.doc.on('change', (instance: any, change: any) => {
+      this.parsedHtml = marked(instance.getValue());
     });
   }
 }

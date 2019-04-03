@@ -1,5 +1,11 @@
 <div class="maddob-markdown-editor-container">
   <div class="maddob-markdown-editor-content">
-    <textarea #editor></textarea>
+    <div class="maddob-markdown-editor">
+      <textarea #editor></textarea>
+    </div>
+
+    <div class="maddob-markdown-editor-preview" [innerHTML]="parsedHtml">
+
+    </div>
   </div>
 </div>

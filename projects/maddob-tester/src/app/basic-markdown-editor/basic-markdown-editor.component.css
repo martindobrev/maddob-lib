@@ -1,3 +1,19 @@
 .maddob-markdown-editor-container {
     border: 1px solid #777;
 }
+
+.maddob-markdown-editor-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.maddob-markdown-editor {
+    flex-basis: 50%;
+    flex-grow: 1;
+}
+
+.maddob-markdown-editor-preview {
+    flex-basis: 50%;
+    border-left: 1px solid #ccc;
+}
