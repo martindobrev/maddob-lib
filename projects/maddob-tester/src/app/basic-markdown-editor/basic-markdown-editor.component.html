@@ -1,4 +1,25 @@
 <div class="maddob-markdown-editor-container">
+
+  <!-- HEADER -->
+  <div class="maddob-markdown-editor-header">
+    <div class="maddob-markdown-editor-left">
+        <button>bold</button>
+        <button>italic</button>
+        <button>quote</button>
+    </div>
+
+    <div class="maddob-markdown-editor-center">
+        <button>link</button>
+        <button>image</button>
+    </div>
+
+    <div class="maddob-markdown-editor-right">
+        <button>preview on</button>
+        <button>fullscreen</button>
+    </div>
+  </div>
+
+  <!-- EDITOR CONTENT -->
   <div class="maddob-markdown-editor-content">
     <div class="maddob-markdown-editor" (window:resize)="resizeEditor()">
       <textarea #editor></textarea>

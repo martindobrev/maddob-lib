@@ -22,3 +22,28 @@
     padding: 5px;
     border-left: 1px solid #ccc;
 }
+
+/* HEADER */
+.maddob-markdown-editor-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #777;
+}
+
+.maddob-markdown-editor-header-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.maddob-markdown-editor-header-center {
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.maddob-markdown-editor-header-right {
+    display: flex;
+    justify-content: flex-end;
+}
