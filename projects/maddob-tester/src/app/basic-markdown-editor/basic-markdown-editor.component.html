@@ -14,7 +14,7 @@
     </div>
 
     <div class="maddob-markdown-editor-right">
-        <button>preview on</button>
+        <button (click)="togglePreview()">preview on</button>
         <button>fullscreen</button>
     </div>
   </div>
@@ -25,7 +25,7 @@
       <textarea #editor></textarea>
     </div>
 
-    <div class="maddob-markdown-editor-preview" [innerHTML]="parsedHtml">
+    <div *ngIf="previewEnabled" class="maddob-markdown-editor-preview" [innerHTML]="parsedHtml">
     </div>    
   </div>
 </div>

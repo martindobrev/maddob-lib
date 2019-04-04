@@ -14,6 +14,8 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   parsedHtml = '';
 
+  previewEnabled = true;
+
   @ViewChild("editor") editor: ElementRef;
 
   constructor() { }
@@ -46,5 +48,10 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
       const editorContainer = this.editor.nativeElement.parentNode;
       this.codeMirror.setSize(editorContainer.offsetWidth, editorContainer.offsetHeight);
     }, 200);
+  }
+
+  togglePreview() {
+    this.previewEnabled = !this.previewEnabled;
+    this.resizeEditor();
   }
 }
