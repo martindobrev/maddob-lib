@@ -16,6 +16,8 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   previewEnabled = true;
 
+  fullscreenEnabled = false;
+
   @ViewChild("editor") editor: ElementRef;
 
   constructor() { }
@@ -52,6 +54,11 @@ export class BasicMarkdownEditorComponent implements OnInit, AfterViewInit {
 
   togglePreview() {
     this.previewEnabled = !this.previewEnabled;
+    this.resizeEditor();
+  }
+
+  toggleFullscreen() {
+    this.fullscreenEnabled = !this.fullscreenEnabled;
     this.resizeEditor();
   }
 }

@@ -1,4 +1,4 @@
-<div class="maddob-markdown-editor-container">
+<div class="maddob-markdown-editor-container" [ngClass]="{'fullscreen': fullscreenEnabled}">
 
   <!-- HEADER -->
   <div class="maddob-markdown-editor-header">
@@ -15,17 +15,19 @@
 
     <div class="maddob-markdown-editor-right">
         <button (click)="togglePreview()">preview on</button>
-        <button>fullscreen</button>
+        <button (click)="toggleFullscreen()">fullscreen</button>
     </div>
   </div>
 
   <!-- EDITOR CONTENT -->
-  <div class="maddob-markdown-editor-content">
+  <div class="maddob-markdown-editor-content" 
+  [ngClass]="{'default-height': !fullscreenEnabled, 'full-height': fullscreenEnabled}">
     <div class="maddob-markdown-editor" (window:resize)="resizeEditor()">
       <textarea #editor></textarea>
     </div>
 
-    <div *ngIf="previewEnabled" class="maddob-markdown-editor-preview" [innerHTML]="parsedHtml">
+    <div *ngIf="previewEnabled" class="maddob-markdown-editor-preview" [innerHTML]="parsedHtml"
+    [ngClass]="{'default-height': !fullscreenEnabled, 'full-height': fullscreenEnabled}">
     </div>    
   </div>
 </div>

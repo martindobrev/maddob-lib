@@ -6,7 +6,6 @@
     display: flex;
     flex-grow: 1;
     flex-direction: row;
-    height: 300px;
 }
 
 .maddob-markdown-editor {
@@ -19,7 +18,7 @@
     flex-basis: 50%;
     flex-grow: 1;
     overflow: scroll;
-    padding: 5px;
+    padding: 0 5px 0 5px;
     border-left: 1px solid #ccc;
 }
 
@@ -46,4 +45,35 @@
 .maddob-markdown-editor-header-right {
     display: flex;
     justify-content: flex-end;
+}
+
+.default-height {
+    height: 300px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+ /***** FULLSCREEN CSS *****/
+.fullscreen {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.fullscreen .maddob-markdown-editor-header {
+    flex-basis: 20px;
+    flex-grow: 0;
+}
+
+.fullscreen .maddob-markdown-editor-content {
+    flex-grow: 1;
 }
