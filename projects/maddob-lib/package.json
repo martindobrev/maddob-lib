@@ -1,7 +1,7 @@
 {
   "name": "maddob-lib",
-  "version": "0.2.0",
-  "description": "Some useful angular components. Currently only markdown editor based on Codemirror is available",
+  "version": "0.2.1",
+  "description": "Some useful angular components. Currently only markdown editor based on Codemirror is available and a ReadableTimePipe are available",
   "keywords" :["Angular","Library"],
   "license" : "SEE LICENSE IN LICENSE",
   "repository": {
