@@ -48,6 +48,8 @@ export class ReadableTimePipe implements PipeTransform {
       seconds = seconds - minutes * SECONDS_MINUTE;
     }
 
+    seconds = Math.floor(seconds);
+
     let parts: Array<string> = [];
 
     if (days > 1) {
@@ -68,5 +70,4 @@ export class ReadableTimePipe implements PipeTransform {
 
     return parts.join(' ');
   }
-
 }

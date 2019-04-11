@@ -27,6 +27,14 @@ describe('ReadableTimePipe', () => {
     expect(pipe.transform(9)).toEqual('9s');
   });
 
+  it('Format 2000 seconds', () => {
+    expect(pipe.transform(2000)).toEqual('33m 20s');
+  });
+
+  it('Format floats 189.567 seconds', () => {
+    expect(pipe.transform(189.567)).toEqual('3m 9s');
+  });
+
   it('Format negative numbers returns empty string', () => {
     expect(pipe.transform(-1232323)).toEqual('');
   });
