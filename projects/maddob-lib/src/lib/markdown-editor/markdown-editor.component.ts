@@ -55,7 +55,7 @@ export class MarkdownEditorComponent implements OnInit, AfterViewInit, ControlVa
   onChange = (newValue: string) => {};
   onTouched = () => {};
 
-  @ViewChild("editor") editor: ElementRef;
+  @ViewChild("editor", { static: true }) editor: ElementRef;
 
   constructor(
     @Attribute('required') public required: boolean = false,
