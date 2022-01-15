@@ -27,7 +27,7 @@
     "@angular/router": "~10.0.14",
     "codemirror": "^5.45.0",
     "core-js": "^2.5.4",
-    "marked": "^0.6.1",
+    "marked": "^4.0.10",
     "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "uikit": "^3.0.3",
